@@ -11,6 +11,7 @@
 import TodoHeader from "./TodoHeader";
 import TodoList from "./TodoList";
 import TodoFooter from "./TodoFooter";
+import storageUtil from '../../util/storageUtil'
 
 export default {
   name: "app",
@@ -18,7 +19,8 @@ export default {
     return {
       // 从locaStorage(缓存)中读取todos，用于开启浏览器缓存。
       // 开启缓存即使浏览器关闭，下次打开浏览器，数据还是浏览器关闭之前的
-      todos: JSON.parse(window.localStorage.getItem("todos_key") || "[]")
+      // todos: JSON.parse(window.localStorage.getItem("todos_key") || "[]")
+      todos: storageUtil.readTodos()
     };
   },
   components: {
@@ -47,10 +49,16 @@ export default {
     todos:{
       deep:true, // 开启深度监视
       // newValue为todos最新的值
-      handler:function (newValue) {
-        // 将todos最新的JSON数据值保存到localStorage中
-        window.localStorage.setItem('todos_key',JSON.stringify(newValue))
-      }
+
+      // 完整写法
+      // handler:function (newValue) {
+      //   // 将todos最新的JSON数据值保存到localStorage中
+      //   // window.localStorage.setItem('todos_key',JSON.stringify(newValue))
+      //   storageUtil.saveTodos(newValue)
+      // }
+
+      // 简便写法
+      handler:storageUtil.saveTodos
     }
   }
 };

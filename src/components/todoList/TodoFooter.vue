@@ -58,6 +58,7 @@ export default {
         // ruduce写法
         // return this.checkedItem === this.todos.length && this.checkedItem > 0;
         // filter写法
+        // 返回true则说明isAllCheck=true,即checkbox被选中。
         return this.checkNum.length === this.todos.length && this.todos.length > 0;
       },
       // 监视当前输入框最新的值

@@ -15,21 +15,14 @@ import TodoFooter from "./TodoFooter";
 
 export default {
   name: "app",
-  // data() {
-  //   return {
-  //     // 从locaStorage(缓存)中读取todos，用于开启浏览器缓存。
-  //     // 开启缓存即使浏览器关闭，下次打开浏览器，数据还是浏览器关闭之前的
-  //     // todos: JSON.parse(window.localStorage.getItem("todos_key") || "[]")
-  //     todos: storageUtil.readTodos()
-  //   };
-  // },
+  mounted(){
+    // 异步获取locaStorage中保存todos数据并显示
+    this.$store.dispatch('reqTodos')
+  },
   components: {
     TodoHeader,
     TodoList,
     TodoFooter
-  },
-  methods: {
-    
   },
   // 使用watch属性对数据进行监视
   // watch: {
